@@ -3,10 +3,14 @@
 import * as React from "react";
 import { Formik } from "formik";
 import { LoginPage as TablerLoginPage } from "tabler-react";
+import { useDispatch } from "react-redux";
+
+import { attemptLogin, startLogin, startLoginProcess } from "../store/store";
 
 type Props = {||};
 
-function LoginPage(props: Props): React.Node {
+const LoginPage = () => {
+  const dispatch = useDispatch();
   return (
     <Formik
       initialValues={{
@@ -29,7 +33,8 @@ function LoginPage(props: Props): React.Node {
         values,
         { setSubmitting, setErrors /* setValues and other goodies */ }
       ) => {
-        alert("Done!");
+        // Start Auth
+        dispatch(attemptLogin(values.email, values.password));
       }}
       render={({
         values,
@@ -51,6 +56,6 @@ function LoginPage(props: Props): React.Node {
       )}
     />
   );
-}
+};
 
 export default LoginPage;

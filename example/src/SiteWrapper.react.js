@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { NavLink, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 import {
   Site,
@@ -14,8 +15,11 @@ import {
 
 import type { NotificationProps } from "tabler-react";
 
+import { logoutUser } from "./store/store";
+
 type Props = {|
   +children: React.Node,
+  +logout: Function,
 |};
 
 type State = {|
@@ -41,96 +45,96 @@ type navItem = {|
 |};
 
 const navBarItems: Array<navItem> = [
-  {
-    value: "Home",
-    to: "/",
-    icon: "home",
-    LinkComponent: withRouter(NavLink),
-    useExact: true,
-  },
-  {
-    value: "Interface",
-    icon: "box",
-    subItems: [
-      {
-        value: "Cards Design",
-        to: "/cards",
-        LinkComponent: withRouter(NavLink),
-      },
-      { value: "Charts", to: "/charts", LinkComponent: withRouter(NavLink) },
-      {
-        value: "Pricing Cards",
-        to: "/pricing-cards",
-        LinkComponent: withRouter(NavLink),
-      },
-    ],
-  },
-  {
-    value: "Components",
-    icon: "calendar",
-    subItems: [
-      { value: "Maps", to: "/maps", LinkComponent: withRouter(NavLink) },
-      { value: "Icons", to: "/icons", LinkComponent: withRouter(NavLink) },
-      { value: "Store", to: "/store", LinkComponent: withRouter(NavLink) },
-      { value: "Blog", to: "/blog", LinkComponent: withRouter(NavLink) },
-    ],
-  },
+  // {
+  //   value: "Home",
+  //   to: "/",
+  //   icon: "home",
+  //   LinkComponent: withRouter(NavLink),
+  //   useExact: true,
+  // },
+  // {
+  //   value: "Interface",
+  //   icon: "box",
+  //   subItems: [
+  //     {
+  //       value: "Cards Design",
+  //       to: "/cards",
+  //       LinkComponent: withRouter(NavLink),
+  //     },
+  //     { value: "Charts", to: "/charts", LinkComponent: withRouter(NavLink) },
+  //     {
+  //       value: "Pricing Cards",
+  //       to: "/pricing-cards",
+  //       LinkComponent: withRouter(NavLink),
+  //     },
+  //   ],
+  // },
+  // {
+  //   value: "Components",
+  //   icon: "calendar",
+  //   subItems: [
+  //     { value: "Maps", to: "/maps", LinkComponent: withRouter(NavLink) },
+  //     { value: "Icons", to: "/icons", LinkComponent: withRouter(NavLink) },
+  //     { value: "Store", to: "/store", LinkComponent: withRouter(NavLink) },
+  //     { value: "Blog", to: "/blog", LinkComponent: withRouter(NavLink) },
+  //   ],
+  // },
   {
     value: "Pages",
     icon: "file",
     subItems: [
       { value: "Profile", to: "/profile", LinkComponent: withRouter(NavLink) },
       { value: "Login", to: "/login", LinkComponent: withRouter(NavLink) },
-      {
-        value: "Register",
-        to: "/register",
-        LinkComponent: withRouter(NavLink),
-      },
-      {
-        value: "Forgot password",
-        to: "/forgot-password",
-        LinkComponent: withRouter(NavLink),
-      },
-      { value: "400 error", to: "/400", LinkComponent: withRouter(NavLink) },
-      { value: "401 error", to: "/401", LinkComponent: withRouter(NavLink) },
-      { value: "403 error", to: "/403", LinkComponent: withRouter(NavLink) },
-      { value: "404 error", to: "/404", LinkComponent: withRouter(NavLink) },
-      { value: "500 error", to: "/500", LinkComponent: withRouter(NavLink) },
-      { value: "503 error", to: "/503", LinkComponent: withRouter(NavLink) },
-      { value: "Email", to: "/email", LinkComponent: withRouter(NavLink) },
-      {
-        value: "Empty page",
-        to: "/empty-page",
-        LinkComponent: withRouter(NavLink),
-      },
-      { value: "RTL", to: "/rtl", LinkComponent: withRouter(NavLink) },
+      // {
+      //   value: "Register",
+      //   to: "/register",
+      //   LinkComponent: withRouter(NavLink),
+      // },
+      // {
+      //   value: "Forgot password",
+      //   to: "/forgot-password",
+      //   LinkComponent: withRouter(NavLink),
+      // },
+      // { value: "400 error", to: "/400", LinkComponent: withRouter(NavLink) },
+      // { value: "401 error", to: "/401", LinkComponent: withRouter(NavLink) },
+      // { value: "403 error", to: "/403", LinkComponent: withRouter(NavLink) },
+      // { value: "404 error", to: "/404", LinkComponent: withRouter(NavLink) },
+      // { value: "500 error", to: "/500", LinkComponent: withRouter(NavLink) },
+      // { value: "503 error", to: "/503", LinkComponent: withRouter(NavLink) },
+      // { value: "Email", to: "/email", LinkComponent: withRouter(NavLink) },
+      // {
+      //   value: "Empty page",
+      //   to: "/empty-page",
+      //   LinkComponent: withRouter(NavLink),
+      // },
+      // { value: "RTL", to: "/rtl", LinkComponent: withRouter(NavLink) },
     ],
   },
-  {
-    value: "Forms",
-    to: "/form-elements",
-    icon: "check-square",
-    LinkComponent: withRouter(NavLink),
-  },
-  {
-    value: "Gallery",
-    to: "/gallery",
-    icon: "image",
-    LinkComponent: withRouter(NavLink),
-  },
-  {
-    icon: "file-text",
-    value: "Documentation",
-    to:
-      process.env.NODE_ENV === "production"
-        ? "https://tabler.github.io/tabler-react/documentation"
-        : "/documentation",
-  },
+  // {
+  //   value: "Forms",
+  //   to: "/form-elements",
+  //   icon: "check-square",
+  //   LinkComponent: withRouter(NavLink),
+  // },
+  // {
+  //   value: "Gallery",
+  //   to: "/gallery",
+  //   icon: "image",
+  //   LinkComponent: withRouter(NavLink),
+  // },
+  // {
+  //   icon: "file-text",
+  //   value: "Documentation",
+  //   to:
+  //     process.env.NODE_ENV === "production"
+  //       ? "https://tabler.github.io/tabler-react/documentation"
+  //       : "/documentation",
+  // },
 ];
 
-const accountDropdownProps = {
-  avatarURL: "./demo/faces/female/25.jpg",
-  name: "Jane Pearson",
+const accountDropdownProps = ({ logoutUser, user }) => ({
+  avatarURL: user.authData ? user.authData.picture : "",
+  name: user.data ? `${user.data.firstName} ${user.data.lastName}` : "",
   description: "Administrator",
   options: [
     { icon: "user", value: "Profile" },
@@ -139,9 +143,13 @@ const accountDropdownProps = {
     { icon: "send", value: "Message" },
     { isDivider: true },
     { icon: "help-circle", value: "Need help?" },
-    { icon: "log-out", value: "Sign out" },
+    {
+      icon: "log-out",
+      value: "Sign out",
+      onClick: logoutUser,
+    },
   ],
-};
+});
 
 class SiteWrapper extends React.Component<Props, State> {
   state = {
@@ -228,7 +236,7 @@ class SiteWrapper extends React.Component<Props, State> {
               ),
             unread: unreadCount,
           },
-          accountDropdown: accountDropdownProps,
+          accountDropdown: accountDropdownProps(this.props),
         }}
         navProps={{ itemsObjects: navBarItems }}
         routerContextComponentType={withRouter(RouterContextProvider)}
@@ -293,4 +301,7 @@ class SiteWrapper extends React.Component<Props, State> {
   }
 }
 
-export default SiteWrapper;
+export default connect(
+  state => ({ user: state }),
+  { logoutUser }
+)(SiteWrapper);

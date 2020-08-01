@@ -2,7 +2,6 @@ import * as React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {
   ForgotPasswordPage,
-  LoginPage,
   RegisterPage,
   Error400,
   Error401,
@@ -13,6 +12,7 @@ import {
   Empty,
   Email,
   ProfilePage,
+  LoginPage,
 } from "./pages";
 
 import HomePage from "./HomePage.react";
@@ -35,8 +35,8 @@ function App(props: Props): React.Node {
     <React.StrictMode>
       <Router>
         <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/400" component={Error400} />
+          <Route exact path="/" component={LoginPage} />
+          {/* <Route exact path="/400" component={Error400} />
           <Route exact path="/401" component={Error401} />
           <Route exact path="/403" component={Error403} />
           <Route exact path="/404" component={Error404} />
@@ -50,13 +50,13 @@ function App(props: Props): React.Node {
           <Route exact path="/form-elements" component={FormElementsPage} />
           <Route exact path="/forgot-password" component={ForgotPasswordPage} />
           <Route exact path="/gallery" component={GalleryPage} />
-          <Route exact path="/icons" component={IconPage} />
+          <Route exact path="/icons" component={IconPage} /> */}
           <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/maps" component={MapCardsPage} />
-          <Route exact path="/pricing-cards" component={PricingCardsPage} />
+          {/* <Route exact path="/maps" component={MapCardsPage} />
+          <Route exact path="/pricing-cards" component={PricingCardsPage} /> */}
           <Route exact path="/profile" component={ProfilePage} />
-          <Route exact path="/register" component={RegisterPage} />
-          <Route exact path="/store" component={StoreCardsPage} />
+          {/* <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/store" component={StoreCardsPage} /> */}
           <Route component={Error404} />
         </Switch>
       </Router>

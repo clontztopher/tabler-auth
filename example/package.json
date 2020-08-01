@@ -5,19 +5,24 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
+    "@auth0/auth0-react": "^1.0.0",
+    "@reduxjs/toolkit": "^1.4.0",
+    "auth0-js": "^9.13.4",
     "d3-scale": "^3.0.0",
     "formik": "^1.0.2",
     "prop-types": "^15.6.1",
-    "react": "^16.2.0",
+    "react": "^16.8.0",
     "react-c3js": "^0.1.20",
-    "react-dom": "^16.2.0",
+    "react-dom": "16.8.0",
     "react-google-maps": "^9.4.5",
+    "react-redux": "^7.2.1",
     "react-router-dom": "^5.0.0",
     "react-scripts": "^2.0.3",
     "react-simple-maps": "^0.12.0",
     "react-syntax-highlighter": "^10.0.0",
     "refractor": "^2.6.1",
-    "tabler-react": "link:.."
+    "tabler-react": "link:..",
+    "whatwg-fetch": "^3.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
